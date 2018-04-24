@@ -4,18 +4,16 @@ const   calc = document.getElementById('calc'),
         btnClass = 'js-btn';
 let     total = 0,
         lastOp = '',
-        isNewVal = true;
+        isNewVal = true,
+        count;
 
 calc.addEventListener('click', ev => {
     const el = ev.target;
     if (!el.classList.contains(btnClass)) {
         return;
     }
-    
-    const val = el.textContent;
 
-    console.log(val);
-    route(val);
+    route(el.textContent);
 });
 
 function route(val) {
@@ -31,12 +29,19 @@ function route(val) {
 }
 
 function number (val) {
+    if (!isNewVal && count >= 20 ) {
+        return;
+    }
+
     if (isNewVal || res.value === '0') {
         res.value = val;
         isNewVal = false;
     } else {
         res.value += val;
     }
+
+    const num = res.value;
+    count = Number(num) < 0 ? num.length - 1 : num.length;
 }
 
 function clear (val) {
@@ -63,11 +68,13 @@ function clear (val) {
 function transform(val) {
     switch (val) {
         case '±':
-            if (res.value !== '0') {
-                res.value = ~res.value.indexOf('-') ? 
-                    res.value.slice(1) : 
-                    '-' + res.value;
+            if (res.value === '0' || isNewVal) {
+                return;
             }
+
+            res.value = ~res.value.indexOf('-') ? 
+                res.value.slice(1) : 
+                '-' + res.value;
         break;
 
         case '.':
@@ -95,7 +102,7 @@ function operation (op) {
         if (isNewVal) {
             hist.innerText = hist.innerText.slice(0, -2) + ' ' + op;
         } else {
-            hist.innerText += ' ' + newNum + ' ' + op;  
+            hist.innerText = total + ' ' + op;  
         }
     } else {
         hist.innerText = newNum + ' ' + op;

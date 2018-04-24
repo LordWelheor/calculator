@@ -1,16 +1,11 @@
 @import (less) 'node_modules/normalize.css/normalize.css';
 @import (less) './_media';
 
-@color-svg: #800;
-@color-hover-svg: #008;
 @color-primary: #888;
 @color-btns: #ddd;
 @color-display: #fff;
 
-*,
-h1,
-h2,
-h3 {
+* {
     margin: 0;
     padding: 0;
 }
@@ -27,8 +22,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    overflow: hidden;
-    width: 300px;
+    margin: 30px auto 0;
+    width: 250px;
     padding: 10px;
     font-size: 2rem;
     border-radius: 1.3rem;
@@ -36,9 +31,10 @@ body {
 
     &__disp {
         width: 100%;
-        position: relative;
+        margin-bottom: .8rem;
+        padding: 0 1rem;
         border-radius: 13px;
-        background-color: @color-display;        
+        background-color: @color-display;
     }
 
     &__hist {
@@ -46,22 +42,14 @@ body {
         height: 1.3rem;
         width: 90%;
         margin: .5rem auto;
-        // position: absolute;
-        // top: 0;
-        // right: 5%;
-        border: none;
-        // background-color: #800;
         font-size: 1rem;
         text-align: right;
-        white-space: nowrap;
-        // text-overflow: ellipsis;
-        overflow: hidden;
     }
 
     &__res {
         display: block;
         width: 100%;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         border: none;
         background-color: inherit;
         text-align: right;
